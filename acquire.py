@@ -6,7 +6,9 @@ def get_blog_article_content(url, header = {'User-Agent': 'Codeup Data Science'}
     soup = BeautifulSoup(requests.get(url, headers=header).content, 'html.parser')
     return [link['href'] for link in soup.select('a.more-link')]
 
-def get_blog_articles(base_url, header = {'User-Agent': 'Codeup Data Science'}):
+def get_blog_articles():
+    base_url = 'https://codeup.com/blog/'
+    header = {'User-Agent': 'Codeup Data Science'}
     urls = get_blog_article_content(base_url)
     output = []
     for blog in urls:
@@ -20,7 +22,8 @@ def get_cats(url):
     soup = BeautifulSoup(requests.get(url).content)
     return [cat.text.lower() for cat in soup.find_all('li')[1:]]
 
-def get_news_articles(url):
+def get_news_articles():
+    url = 'https://inshorts.com/en/read'
     cats = get_cats(url)
     output = []
     for cat in cats:
